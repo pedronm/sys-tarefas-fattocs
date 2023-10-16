@@ -1,12 +1,18 @@
 version: '3.7'
 services:
-  back:
-    build: sys-tarefa
+  myapp:
+    image: openjdk:17
+    container_name: "back"
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - "./sys-tarefa/target/sys-tarefa-dev.jar:/usr/app"
+    command: ['java', '-jar', '/usr/app/sys-tarefa-dev.jar']
   front:
     build: fattocs-web-page
     ports:
       - 80:80
-  
   db:
     build: db
     ports:
