@@ -1,0 +1,10 @@
+<div [ngClass]="isModalOpen ? 'modal__anchor' : '' " >
+</div>
+<div class="modal" [ngClass]="isModalOpen ? 'modal--open' : 'modal--close' " >
+    <div class="modal__header">
+        <a href="" (click)="isModalOpen=false">X</a>
+    </div>
+    <div class="modal__body">        
+        <ng-content></ng-content>
+    </div>
+</div>

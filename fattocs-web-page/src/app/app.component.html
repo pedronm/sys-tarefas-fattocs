@@ -1,0 +1,25 @@
+<div class="container">
+  <header>ToDo App Fattocs</header>
+  <main class="conteudo" >
+      <div class="lista" cdkDropList (cdkDropListDropped)="dropped($event)">
+          <div class="lista__item" *ngFor="let itemTarefa of listaTarefas" cdkDrag [cdkDragData]="itemTarefa" >
+              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+              <app-card-tarefa [tarefaCard]="itemTarefa" (mudancaItemLista)="recuperarLista()"></app-card-tarefa>
+          </div>
+      </div>
+     
+  </main>
+  <footer>
+    <span class="btn-footer" (click)="modal.isModalOpen = this.modal.isModalOpen ? false : true">
+        +
+    </span>            
+  </footer>
+  <app-modal #modal >
+    <app-form-inclui-tarefa #form 
+      [btnSaveLabel]="'adicionar'"
+      [btnCancelLabel]="'cancelar'"
+      (tarefaFormEmitter)="incluirTarefa($event)">        
+    </app-form-inclui-tarefa>    
+  </app-modal>
+</div>
+

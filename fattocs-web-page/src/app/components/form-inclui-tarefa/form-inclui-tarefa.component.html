@@ -1,0 +1,19 @@
+<div [formGroup]="tarefaForm"  >
+
+    <input type="text" class="card__in" id="nomeTarefa"
+        required
+        [(ngModel)]="nomeTarefa" formControlName="nomeTarefa" />
+
+    <input type="date" class="card__in" id="dtLimite"
+        required
+        [(ngModel)]="dtLimite" formControlName="dtLimite" />
+        
+    <!-- (ngModelChange)="item.value=currencyInputChanged($event)" -->
+    <!-- | currency:'BRL':'symbol' -->
+    <input type="text" class="card__in" id="custo"
+        required
+        [(ngModel)]="custo" formControlName="custo" />
+
+   <button (click)="enviar()">{{btnSaveLabel}}</button>
+   <button (click)="cancelar()">{{btnCancelLabel}}</button>
+</div>

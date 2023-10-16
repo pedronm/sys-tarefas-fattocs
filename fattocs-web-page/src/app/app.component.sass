@@ -1,0 +1,100 @@
+.container
+  content: ""
+  position: relative
+  min-width: 25rem
+  min-height: 30rem
+  display: flex
+  flex-flow: column
+  flex-wrap: wrap   
+
+header
+  flex: 1
+  font-size: 3em
+  margin: .73rem .54rem
+
+.conteudo
+  flex: 1
+  height: 50rem
+
+.lista
+  display: flex
+  flex: 1 
+  flex-flow: column
+  justify-content: center
+
+  min-height: 5rem
+
+  background: transparent
+  overflow: auto
+
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+  &__item
+    min-height: 5rem
+    
+    flex: 1
+
+    position: relative
+    color: rgba(0, 0, 0, 0.87)
+    
+    box-sizing: border-box
+    cursor: move
+    font-size: 14px
+
+    padding: 1rem 1rem
+    
+    background-color: #FFAAEC
+    border-bottom: .14rem solid black
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.cdk-drag-preview 
+  box-sizing: border-box
+  border-radius: 4px
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2), 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12)
+
+.cdk-drag-animating 
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.cdk-drop-list-dragging
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+.example-custom-placeholder
+  display: inline-block
+  background: #ccc
+  border: dotted 3px #999
+  min-height: 6rem
+  min-width: 31rem
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1)
+
+footer
+  position: fixed
+  bottom: 0
+  left: 0
+  width: 100%
+  text-align: center
+  display: flex
+  align-items: center
+  justify-content: center
+
+.btn-footer
+  margin-bottom: 5rem
+  background-color: #FFF
+  border: none
+  color: none
+  flex: 0 0 1
+  display: inline-block
+
+  padding: 1.3rem
+  background-color: rgba(225,10,40, .25)
+  font-size: 3rem
+  border-radius: 2rem
+
+  color: red
+  cursor: pointer
+
+  -webkit-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+   
+    
