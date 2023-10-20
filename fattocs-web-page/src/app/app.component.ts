@@ -3,7 +3,6 @@ import { ToDoListService } from './services/to-do-list.service';
 import { IDados } from './contracts/IDados';
 import { moveItemInArray} from '@angular/cdk/drag-drop';
 import { ModalComponent } from './components/modal/modal.component';
-import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +11,11 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class AppComponent {
   public listaTarefas : IDados[] = new Array<IDados>()
-  public tarefa: any
+  public tarefa: any = {
+    nomeTarefa: '',
+    dtLimite: '',
+    custo : 0
+  }
 
   @ViewChild("modal")
   public modal!: ModalComponent
@@ -44,18 +47,39 @@ export class AppComponent {
 
   }
 
-  incluirTarefa(novaTarefa: any): void{        
-    this.service.adicionarTarefa(novaTarefa)
-      .subscribe(
-        {
-          next: (e) => this.listaTarefas.push(e),
-          error: () => {
-          },
-          complete: () => {
-            this.modal.fechar()
+  incluirTarefa(novaTarefa: any): void{      
+    if(novaTarefa.tarefaId == null)  
+      this.service.adicionarTarefa(novaTarefa)
+        .subscribe(
+          {
+            next: (e) => this.listaTarefas.push(e),
+            error: () => {
+            },
+            complete: () => {
+              this.modal.fechar()
+            }
           }
-        }
-      )
+        )
+      else
+        this.service.atualizarTarefa(novaTarefa.tarefaId, this.tarefa)
+          .subscribe(
+            {
+              next : (ret) => {
+                let index = this.listaTarefas.findIndex( (tarefa) => {
+                  return tarefa.tarefaId === novaTarefa.tarefaId
+                })
+                this.listaTarefas.splice(index,1)
+                this.listaTarefas.push(novaTarefa)
+                this.modal.fechar()
+              },
+              complete: () => {this.modal.fechar()}
+            }
+          )
+  }
+
+  editarTarefa(id: number): void{
+    this.modal.isModalOpen = true
+    this.tarefa = this.listaTarefas.find( (tarefa) => tarefa.tarefaId === id)
   }
   
   excluirTarefa(id: number): void{   
@@ -89,5 +113,14 @@ export class AppComponent {
       }
     )
     
+  }
+
+  public cancelarFormulario(param: any){
+    this.modal.fechar()
+  }
+  
+  public abrirModal(){
+    this.tarefa = {}
+    this.modal.isModalOpen = this.modal.isModalOpen ? false : true
   }
 }

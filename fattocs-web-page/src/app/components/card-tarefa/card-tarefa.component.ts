@@ -12,7 +12,8 @@ export class CardTarefaComponent {
 
   constructor(private service: ToDoListService){}
 
-  @Output() mudancaItemLista = new EventEmitter()
+  @Output() mudancaItemListaEmitter = new EventEmitter()
+  @Output() editarItemEmitter = new EventEmitter()
 
   @Input() tarefaCard!: IDados
 
@@ -20,29 +21,12 @@ export class CardTarefaComponent {
 
   @Input() btnCancelLabel = ''
 
-  public isEditando = false
-
   public excluir(): void{
-    this.service.removerTarefa(this.tarefaCard.tarefaId)
-      .subscribe(
-        {
-          next: () => this.mudancaItemLista.emit(),
-          error: () => {}
-        }
-      )
+   this.mudancaItemListaEmitter.emit()
   }
 
-  public salvarAlteracoes(tarefa: any): void {
-    this.service.atualizarTarefa(this.tarefaCard.tarefaId, tarefa)
-      .subscribe(
-        {
-          next: () => {
-            this.isEditando = false
-            this.mudancaItemLista.emit()
-          },
-          error: (err) => {console.log(err)}
-        }
-      )
+  public editarItem() : void{
+    this.editarItemEmitter.emit()
   }
 
 }

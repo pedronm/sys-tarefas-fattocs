@@ -1,11 +1,12 @@
 <div class="card">
     <div class="card__titulo">
         <button class="btn" (click)="excluir()">Excluir</button>
+        <button class="btn" (click)="editarItem()">Editar</button>        
     </div>
    
-    <ng-container  *ngIf="!isEditando; else edicao" >
+    <ng-container >
         <div class="card__conteudo">
-            <button class="btn" (click)="isEditando=true">Editar</button>        
+            
             <div class="card__campos">
                 <span>            
                     {{tarefaCard.nomeTarefa}}
@@ -21,15 +22,4 @@
         
     </ng-container>
 
-    <ng-template #edicao >
-        <app-form-inclui-tarefa
-            [nomeTarefa]="tarefaCard.nomeTarefa"
-            [dtLimite]="tarefaCard.dtLimite"
-            [custo]="tarefaCard.custo"
-            [btnSaveLabel]="'salvar'"
-            [btnCancelLabel]="'cancelar'"
-            (tarefaFormEmitter)="salvarAlteracoes($event)"
-            (cancelarFormEmitter)="this.isEditando = false">
-        </app-form-inclui-tarefa>
-    </ng-template>
 </div>

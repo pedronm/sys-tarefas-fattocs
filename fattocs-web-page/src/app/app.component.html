@@ -4,21 +4,27 @@
       <div class="lista" cdkDropList (cdkDropListDropped)="dropped($event)">
           <div class="lista__item" *ngFor="let itemTarefa of listaTarefas" cdkDrag [cdkDragData]="itemTarefa" >
               <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              <app-card-tarefa [tarefaCard]="itemTarefa" (mudancaItemLista)="recuperarLista()"></app-card-tarefa>
+              <app-card-tarefa [tarefaCard]="itemTarefa" (mudancaItemLista)="recuperarLista()" 
+                (excluirTarefaEmitter)="excluirTarefa(itemTarefa.tarefaId)"
+                (editarItemEmitter)="editarTarefa(itemTarefa.tarefaId)"></app-card-tarefa>
           </div>
       </div>
      
   </main>
   <footer>
-    <span class="btn-footer" (click)="modal.isModalOpen = this.modal.isModalOpen ? false : true">
+    <span class="btn-footer" (click)="abrirModal()">
         +
     </span>            
   </footer>
   <app-modal #modal >
     <app-form-inclui-tarefa #form 
+      [nomeTarefa]="tarefa.nomeTarefa"
+      [custo]="tarefa.custo"
+      [dtLimite]="tarefa.dtLimite"
       [btnSaveLabel]="'adicionar'"
       [btnCancelLabel]="'cancelar'"
-      (tarefaFormEmitter)="incluirTarefa($event)">        
+      (tarefaFormEmitter)="incluirTarefa($event)"
+      (cancelarFormEmitter)="cancelarFormulario($event)">        
     </app-form-inclui-tarefa>    
   </app-modal>
 </div>
