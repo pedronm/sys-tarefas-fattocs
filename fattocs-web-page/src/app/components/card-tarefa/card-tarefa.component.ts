@@ -12,7 +12,7 @@ export class CardTarefaComponent {
 
   constructor(private service: ToDoListService){}
 
-  @Output() mudancaItemListaEmitter = new EventEmitter()
+  @Output() excluirTarefaEmitter = new EventEmitter()
   @Output() editarItemEmitter = new EventEmitter()
 
   @Input() tarefaCard!: IDados
@@ -22,7 +22,7 @@ export class CardTarefaComponent {
   @Input() btnCancelLabel = ''
 
   public excluir(): void{
-   this.mudancaItemListaEmitter.emit()
+   this.excluirTarefaEmitter.emit()
   }
 
   public editarItem() : void{

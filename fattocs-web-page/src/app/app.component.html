@@ -5,7 +5,7 @@
           <div class="lista__item" *ngFor="let itemTarefa of listaTarefas" cdkDrag [cdkDragData]="itemTarefa" >
               <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
               <app-card-tarefa [tarefaCard]="itemTarefa" (mudancaItemLista)="recuperarLista()" 
-                (excluirTarefaEmitter)="excluirTarefa(itemTarefa.tarefaId)"
+                (excluirTarefaEmitter)="excluirTarefaAbrirModal(itemTarefa.tarefaId)"
                 (editarItemEmitter)="editarTarefa(itemTarefa.tarefaId)"></app-card-tarefa>
           </div>
       </div>
@@ -26,6 +26,11 @@
       (tarefaFormEmitter)="incluirTarefa($event)"
       (cancelarFormEmitter)="cancelarFormulario($event)">        
     </app-form-inclui-tarefa>    
+  </app-modal>
+  <app-modal #excluirModal >
+    <p>Confirma a exclusão?</p>
+    <button class="btn" (click)="excluirTarefa()">Sim</button>
+    <button class="btn" (click)="excluirModal.isModalOpen = false">Não</button>
   </app-modal>
 </div>
 

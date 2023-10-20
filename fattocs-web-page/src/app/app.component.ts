@@ -10,6 +10,8 @@ import { ModalComponent } from './components/modal/modal.component';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+  tarefaIdExcluir: number = 0
+
   public listaTarefas : IDados[] = new Array<IDados>()
   public tarefa: any = {
     nomeTarefa: '',
@@ -20,6 +22,8 @@ export class AppComponent {
   @ViewChild("modal")
   public modal!: ModalComponent
 
+  @ViewChild("excluirModal")
+  public excluirModal!: ModalComponent
 
   constructor(private service: ToDoListService){}
 
@@ -82,19 +86,20 @@ export class AppComponent {
     this.tarefa = this.listaTarefas.find( (tarefa) => tarefa.tarefaId === id)
   }
   
-  excluirTarefa(id: number): void{   
-    this.service.removerTarefa(id)
+  excluirTarefa(): void{   
+    this.service.removerTarefa(this.tarefaIdExcluir)
       .subscribe(
         {
           next: () => {
-            let itemIndex = this.listaTarefas.findIndex((el: any) => el.tarefaId = id)
+            let itemIndex = this.listaTarefas.findIndex((el: any) => el.tarefaId = this.tarefaIdExcluir)
             let meioInicialLista = this.listaTarefas.slice(0, itemIndex)
             let meioFinalLista = this.listaTarefas.slice(itemIndex, this.listaTarefas.length)    
             this.listaTarefas = meioInicialLista.concat(meioFinalLista)
+            this.excluirModal.isModalOpen = false
           },
           error: () => {},
           complete: () => {
-
+            this.excluirModal.isModalOpen = false
           }
         }
       )
@@ -123,4 +128,10 @@ export class AppComponent {
     this.tarefa = {}
     this.modal.isModalOpen = this.modal.isModalOpen ? false : true
   }
+
+  public excluirTarefaAbrirModal(id: number){
+    this.tarefaIdExcluir = id
+    this.excluirModal.isModalOpen = true
+  }
+
 }
