@@ -27,10 +27,21 @@ export class AppComponent {
   public recuperarLista(): void{
     this.service.recuperarTarefas()
     .subscribe(
-      (tarefas: [] ) => {
-        this.listaTarefas = tarefas
+      {
+        next:(tarefas: [] ) => {
+          this.listaTarefas = tarefas
+        }
       }
     ) 
+    
+    if(this.listaTarefas.length <= 0 )
+            this.listaTarefas =  Array.from(
+            [
+              {tarefaId: Math.random(), ordem: 0, nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+              {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+              {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') }
+            ])
+
   }
 
   incluirTarefa(novaTarefa: any): void{        

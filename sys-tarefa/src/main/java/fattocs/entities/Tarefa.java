@@ -14,7 +14,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 
-@Entity(name = "tarefas")
 public class Tarefa extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tarefas")
