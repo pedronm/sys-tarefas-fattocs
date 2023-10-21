@@ -53,8 +53,7 @@ export class AppComponent {
 
   }
 
-  incluirTarefa(novaTarefa: any): void{      
-    console.log(novaTarefa)
+  incluirTarefa(novaTarefa: any): void{
     if( novaTarefa.tarefaId == null 
         || novaTarefa.tarefaId == undefined 
       || novaTarefa.tarefaId == 0)  
@@ -77,7 +76,6 @@ export class AppComponent {
           .subscribe(
             {
               next : (ret) => {
-                console.log(ret)
                 this.recuperarLista()
                 this.modal.fechar()
               },
