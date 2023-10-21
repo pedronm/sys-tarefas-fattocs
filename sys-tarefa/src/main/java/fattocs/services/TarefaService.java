@@ -20,15 +20,22 @@ public class TarefaService {
         return Tarefa.deleteById(id);
     }
 
-    public Tarefa persistirTarefa(long id, TarefaDTO tarefa){
+    public Tarefa persistirTarefa( TarefaDTO tarefa){
         Tarefa novaTarefa = new Tarefa();
-        if( id != 0 )
-            novaTarefa = Tarefa.findById(id);
         novaTarefa.setNomeTarefa(tarefa.nomeTarefa);
         novaTarefa.setCusto(Double.valueOf(tarefa.custo));
         novaTarefa.setDtLimite(LocalDate.parse(tarefa.dtLimite));
-        novaTarefa.setOrdem( 1);
+        novaTarefa.setOrdem( Integer.valueOf(tarefa.ordem) );
         novaTarefa.persist();
         return novaTarefa;
     }
-}
+
+    public Tarefa alterarTarefa(Long id, TarefaDTO tarefa){
+        Tarefa taf = Tarefa.findById(id);
+        taf.setNomeTarefa(tarefa.nomeTarefa);
+        taf.setCusto( Double.valueOf(tarefa.custo));
+        taf.setDtLimite( LocalDate.parse(tarefa.dtLimite));
+        taf.setOrdem( Integer.valueOf(tarefa.ordem) );
+        return taf;
+    }
+}   

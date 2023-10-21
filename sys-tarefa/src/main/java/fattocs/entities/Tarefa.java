@@ -14,20 +14,21 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 
+@Entity(name = "tarefa")
 public class Tarefa extends PanacheEntityBase{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tarefas")
-    @SequenceGenerator(name = "tarefas",  sequenceName = "tarefas_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tarefa")
+    @SequenceGenerator(name = "tarefa",  sequenceName = "tarefa_seq")
     @Column(name = "tarefa_id", nullable = false)
-    Long tarefaId;
+    private Long tarefaId;
     @Column(name = "nome_tarefa", nullable=false)
-    public String nomeTarefa;
-    public Double custo;
+    private String nomeTarefa;
+    private Double custo;
     @Column(name = "dt_limite", nullable=false)
-    public LocalDate dtLimite;
-    public int ordem;
+    private LocalDate dtLimite;
+    private int ordem;
 
-    public Long getId(){
+    public Long getTarefaId(){
         return this.tarefaId;
     }
 
@@ -45,6 +46,10 @@ public class Tarefa extends PanacheEntityBase{
     
     public int getOrdem(){
         return this.ordem;
+    }
+
+    public void setTarefaId(Long tarefaId){
+        this.tarefaId = tarefaId;
     }
 
     public void setNomeTarefa(String nome){

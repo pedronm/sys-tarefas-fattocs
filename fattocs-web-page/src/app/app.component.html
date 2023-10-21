@@ -12,16 +12,18 @@
      
   </main>
   <footer>
-    <span class="btn-footer" (click)="abrirModal()">
+    <span class="btn-footer" (click)="abrirModalNovaTarefa()">
         +
     </span>            
   </footer>
   <app-modal #modal >
     <app-form-inclui-tarefa #form 
+      [tarefaId]="tarefa.tarefaId"
       [nomeTarefa]="tarefa.nomeTarefa"
       [custo]="tarefa.custo"
       [dtLimite]="tarefa.dtLimite"
-      [btnSaveLabel]="'adicionar'"
+      [ordem]="tarefa.ordem"
+      [btnSaveLabel]="recuperarLabelBtnModal()"
       [btnCancelLabel]="'cancelar'"
       (tarefaFormEmitter)="incluirTarefa($event)"
       (cancelarFormEmitter)="cancelarFormulario($event)">        

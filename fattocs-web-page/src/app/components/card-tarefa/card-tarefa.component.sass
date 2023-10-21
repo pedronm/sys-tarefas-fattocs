@@ -12,25 +12,40 @@
 .card
     display: flex
     flex-flow: column
-    flex-wrap: nowrap
+    flex-wrap: wrap
 
     &__titulo       
+        flex: 1
         margin-right: 1rem
+        
         display: flex
         flex-flow: row
+        flex-wrap: wrap
         justify-content: flex-end
     
     &__conteudo
+        flex: 1
         margin-top: .76rem
         margin-right: 1rem
+
         display: flex
-        flex-flow: row-reverse
-        justify-content: space-between
+        flex-flow: row
+        flex-wrap: wrap
+        align-content: flex-end
 
-    &__campos
-        font-size: 1.1em
-        font-weight: 600
-        text-transform: uppercase
+    &__grupo
+        flex: 1
 
+        display: flex
+        flex-flow: column
+
+        & span:first-child 
+            font-weight: 600
+            text-transform: uppercase
+            margin-bottom: 1.1rem
+        & span:last-child      
+            border-left: .1rem solid black
+            padding-left: .4rem
+            text-transform: uppercase
     
 

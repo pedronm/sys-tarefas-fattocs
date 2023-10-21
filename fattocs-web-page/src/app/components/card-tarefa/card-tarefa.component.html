@@ -6,13 +6,26 @@
    
     <ng-container >
         <div class="card__conteudo">
-            
-            <div class="card__campos">
-                <span>            
+        
+            <div class="card__grupo">
+                <span class="card__grupo__descricao">
+                    Nome Tarefa
+                </span>
+                <span class="card__grupo__valor">            
                     {{tarefaCard.nomeTarefa}}
+                </span>
+            </div>
+            <div class="card__grupo">
+                <span class="card__grupo__descricao">
+                    Data Limite
                 </span>
                 <span>
                     {{tarefaCard.dtLimite | date: 'dd/MM/yyyy' }}
+                </span>
+            </div>
+            <div class="card__grupo">
+                <span class="card__grupo__descricao">
+                    Custo
                 </span>
                 <span>
                     {{tarefaCard.custo | currency:'BRL':'symbol'}}

@@ -19,7 +19,7 @@ export class ToDoListService {
   }
 
   public atualizarTarefa(id: number, tarefaNova: any): Observable<any>{
-    return this.http.put(`${this.url}/tarefa/${id}`, {tarefaAntiga: tarefaNova})
+    return this.http.put(`${this.url}/tarefa/${id}`,  tarefaNova)
   }
 
   public removerTarefa(id: number): Observable<any>{

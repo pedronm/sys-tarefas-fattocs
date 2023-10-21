@@ -14,9 +14,11 @@ export class AppComponent {
 
   public listaTarefas : IDados[] = new Array<IDados>()
   public tarefa: any = {
+    terefaId: 0,
     nomeTarefa: '',
     dtLimite: '',
-    custo : 0
+    custo : 0,
+    ordem: 0
   }
 
   @ViewChild("modal")
@@ -40,23 +42,29 @@ export class AppComponent {
         }
       }
     ) 
-    
-    if(this.listaTarefas.length <= 0 )
-            this.listaTarefas =  Array.from(
-            [
-              {tarefaId: Math.random(), ordem: 0, nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
-              {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
-              {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') }
-            ])
+    // Usado para mockar
+    // if(this.listaTarefas.length <= 0 )
+    //   this.listaTarefas =  Array.from(
+    //   [
+    //     {tarefaId: Math.random(), ordem: 0, nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+    //     {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+    //     {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') }
+    //   ])
 
   }
 
   incluirTarefa(novaTarefa: any): void{      
-    if(novaTarefa.tarefaId == null)  
+    console.log(novaTarefa)
+    if( novaTarefa.tarefaId == null 
+        || novaTarefa.tarefaId == undefined 
+      || novaTarefa.tarefaId == 0)  
       this.service.adicionarTarefa(novaTarefa)
         .subscribe(
           {
-            next: (e) => this.listaTarefas.push(e),
+            next: (e) => {
+              this.listaTarefas.push(e)
+              this.recuperarLista()
+            },
             error: () => {
             },
             complete: () => {
@@ -69,11 +77,8 @@ export class AppComponent {
           .subscribe(
             {
               next : (ret) => {
-                let index = this.listaTarefas.findIndex( (tarefa) => {
-                  return tarefa.tarefaId === novaTarefa.tarefaId
-                })
-                this.listaTarefas.splice(index,1)
-                this.listaTarefas.push(novaTarefa)
+                console.log(ret)
+                this.recuperarLista()
                 this.modal.fechar()
               },
               complete: () => {this.modal.fechar()}
@@ -90,14 +95,13 @@ export class AppComponent {
     this.service.removerTarefa(this.tarefaIdExcluir)
       .subscribe(
         {
-          next: () => {
-            let itemIndex = this.listaTarefas.findIndex((el: any) => el.tarefaId = this.tarefaIdExcluir)
-            let meioInicialLista = this.listaTarefas.slice(0, itemIndex)
-            let meioFinalLista = this.listaTarefas.slice(itemIndex, this.listaTarefas.length)    
-            this.listaTarefas = meioInicialLista.concat(meioFinalLista)
+          next: () => {          
+            this.recuperarLista()
             this.excluirModal.isModalOpen = false
           },
-          error: () => {},
+          error: () => {
+            this.excluirModal.isModalOpen = false
+          },
           complete: () => {
             this.excluirModal.isModalOpen = false
           }
@@ -124,8 +128,14 @@ export class AppComponent {
     this.modal.fechar()
   }
   
-  public abrirModal(){
-    this.tarefa = {}
+  public abrirModalNovaTarefa(){
+    this.tarefa = {
+      terefaId: 0,
+      nomeTarefa: '',
+      dtLimite: '',
+      custo : 0,
+      ordem: 0
+    }
     this.modal.isModalOpen = this.modal.isModalOpen ? false : true
   }
 
@@ -133,5 +143,10 @@ export class AppComponent {
     this.tarefaIdExcluir = id
     this.excluirModal.isModalOpen = true
   }
+
+  public recuperarLabelBtnModal(): string {
+    return this.tarefa.tarefaId !== 0 && this.tarefa.tarefaId !== undefined ? 'alterar' : 'adicionar'
+  }
+  
 
 }

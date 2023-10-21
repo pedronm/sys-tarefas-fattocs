@@ -22,11 +22,11 @@ export class CardTarefaComponent {
   @Input() btnCancelLabel = ''
 
   public excluir(): void{
-   this.excluirTarefaEmitter.emit()
+   this.excluirTarefaEmitter.emit(this.tarefaCard.tarefaId)
   }
 
   public editarItem() : void{
-    this.editarItemEmitter.emit()
+    this.editarItemEmitter.emit(this.tarefaCard.tarefaId)
   }
 
 }

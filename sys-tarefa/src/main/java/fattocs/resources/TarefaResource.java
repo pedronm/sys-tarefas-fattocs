@@ -33,16 +33,18 @@ public class TarefaResource {
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     public Tarefa post(TarefaDTO dto){
-        return service.persistirTarefa(0, dto);
+        return service.persistirTarefa(dto);
     }
-
+    
+    @Path("{id}")
     @PUT
     @Transactional
     @Consumes(MediaType.APPLICATION_JSON)
     public Tarefa put(@PathParam("id") Long id, TarefaDTO dto){
-        return service.persistirTarefa(id, dto);
+        return service.alterarTarefa(id, dto);
     }
-
+    
+    @Path("{id}")
     @DELETE
     @Transactional
     public boolean delete(@PathParam("id") Long id){
