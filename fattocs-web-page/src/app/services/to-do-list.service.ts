@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/internal/Observable';
 @Injectable()
 export class ToDoListService {
 
-  url: string = '/api/message'
+  url: string = environment.apiUrl
 
   constructor(private http: HttpClient) { }
 
   public recuperarTarefas(): Observable<any>{
-    return this.http.get(`${this.url}`)
+    return this.http.get(`${this.url}/tarefa`)
   }
 
   public adicionarTarefa(tarefa: any): Observable<any>{
