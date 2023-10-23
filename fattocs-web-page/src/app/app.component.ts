@@ -39,17 +39,18 @@ export class AppComponent {
       {
         next:(tarefas: [] ) => {
           this.listaTarefas = tarefas
+        },
+        error: () => {
+          // Usado para mockar
+          this.listaTarefas = [
+            {tarefaId: Math.random(), ordem: 0, nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+            {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
+            {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') }
+          ]
         }
       }
     ) 
-    // Usado para mockar
-    // if(this.listaTarefas.length <= 0 )
-    //   this.listaTarefas =  Array.from(
-    //   [
-    //     {tarefaId: Math.random(), ordem: 0, nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
-    //     {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') },
-    //     {tarefaId: Math.random(), ordem: 0,  nomeTarefa: 'Tarefa 1', custo: 1024, dtLimite: new Date('01/03/2024') }
-    //   ])
+      
 
   }
 
